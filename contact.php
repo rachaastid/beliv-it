@@ -24,8 +24,6 @@ if (insset($_POST['email']!='')){
     else{
         $messagesent=false;
     }
-   
-
 } 
  //database connection
     $conn=new mysqli('localhost','root','','contact')
