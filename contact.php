@@ -1,29 +1,28 @@
 <?php
 
- $messagesent=false;
+
 
 if (insset($_POST['email']!='')){
     if(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
-        $name=$_POST['name'];
-        $email=$_POST['email'];
+        $name = $_POST['name'];
+        $email= $_POST['email'];
         $phone=$_POST['phone'];
-        $message=$_POST['message'];
-    
-        $mailTo="contact@belev-it.com";
-    
-        $headers="From:".$email;
-        $text="you have received an e-mail from".$name."\r\n".$message;
-    
-        mailparse_stream_encode( $mailTo,$headers, $text);
-        rewind($headers);
-        header("Location: index.html");
-        header("Location: indexar.html");
-        header("Location: indexen.html");
-        $messagesent=true;
+        $message= $_POST['message'];
+        $to = "rachaaastid@gmail.com";
+        $subject = "Mail From BelevIT";
+        $txt ="you have received an e-mail from".$name."\r\n tele = " . $phone . "\r\n Message =" . $message;
+        $headers = "From: " .$email ;
+       
+        if($email!=NULL){
+            mail($to,$subject,$txt,$headers);
+        }
+        //redirect
+        header("Location:index.html");
+       
     }
-    else{
-        $messagesent=false;
-    }
+
+   
+
 } 
  //database connection
     $conn=new mysqli('localhost','root','','contact')
