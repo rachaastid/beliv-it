@@ -60,3 +60,39 @@ window.addEventListener('DOMContentLoaded', event => {
 function langue(src){
     window.location=src
 }
+    $(document).ready(function() {
+    $("form").submit(function(event){
+        event.preventDefault();
+        var name=$("#name").val();
+        var email=$("#email").val();
+        var phone=$("#phone").val();
+        var message=$("#message").val();
+        var submitButton=$("#submitButton").val();
+        $(".form-message").load("contact.php",{
+            name:name,
+            email:email,
+            phone:phone,
+            message:name,
+            submitButton:submitButton
+
+        });
+
+    var form = $(this);
+         $.ajax({
+         url: form.attr('action'),
+         method: form.attr('method'),
+         data: form.serialize(),
+         success: function(result){
+     if (result == 'success'){
+         $('.output_message').text('Message Sent!');  
+     } else {
+         $('.output_message').text('Error Sending email!');
+     }
+ }
+});
+
+// Prevents default submission of the form after clicking on the submit button. 
+return false;   
+});
+});
+$("#name,#email,#message,#phone").val("");
